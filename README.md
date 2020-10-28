@@ -2,11 +2,11 @@
 
 This package allows you to get multiple meanings of a word asynchronously between;
 
-+ ##### Turkish to English
-+ ##### English to Turkish
-+ ##### French to English
-+ ##### Spanish to English
-+ ##### German to English
++ Turkish to English
++ English to Turkish
++ French to English
++ Spanish to English
++ German to English
 
 ####Example　
 
