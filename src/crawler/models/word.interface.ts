@@ -16,3 +16,8 @@ export class Word {
     }
   }
 }
+
+export interface WordBlock{
+  description: string;
+  words: Word[];
+}
