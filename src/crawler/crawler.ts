@@ -71,10 +71,10 @@ export class TurengCrawler {
                   if (wordProp.text) {
                     words.push(wordProp);
                   }
-                }                
+                }
               });
               wordBlock.words = words;
-              allWords.push(wordBlock)
+              allWords.push(wordBlock);
             });
             resolve(allWords);
           }

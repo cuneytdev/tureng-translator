@@ -5,7 +5,7 @@ export class Word {
   category: string;
   translatedFrom: string;
   translatedTo: string;
-  type: string
+  type: string;
   constructor(word?: Word) {
     if (word) {
       const keys = Object.keys(word);
@@ -17,7 +17,7 @@ export class Word {
   }
 }
 
-export interface WordBlock{
+export interface WordBlock {
   description: string;
   words: Word[];
 }
