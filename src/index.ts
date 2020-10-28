@@ -5,5 +5,6 @@ const tc = new TurengCrawler();
 getCrawl();
 
 async function getCrawl() {
-//   const data = await tc.translate("akilli", TranslationType.ENGTUR);
+  const data = await tc.translate("aircraft", TranslationType.ENGTUR);
+  console.log(data);
 }
