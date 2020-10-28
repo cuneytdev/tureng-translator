@@ -21,7 +21,7 @@
     "type": "git",
     "url": "git+https://github.com/cuneytdalan/tureng-translator.git"
   },
-  "keywords": [],
+  "keywords": ["tureng","translate", "english", "french", "turkish", "spanish","german", "dictionary"],
   "author": "Cuneyt Dalan",
   "license": "MIT",
   "bugs": {
