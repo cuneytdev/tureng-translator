@@ -11,16 +11,20 @@ This package allows you to get multiple meanings of a word asynchronously betwee
 ####Example　
 
 ```javascript
+ const config: Config = {
+   amount: 1   
+   //you can specify how many word meanings you want
+   detailed: false; 
+   //allows you get all meanings of a word or just the first table on tureng.com
+   //detailed property is set false default
+ }
+ //  config 
  const tc = new TurengCrawler();
- const data = await tc.translate("aircraft", TranslationType.ENGTUR);
+ const data = await tc.translate("aircraft", TranslationType.ENGTUR, config);
  /*[{
      description: 'Meanings of "aircraft" in Turkish English Dictionary : 42 result(s)',
-     words: [ ...[Word] ]
-     },
-	 {
-      description: 'Meanings of "aircraft" with other terms in English Turkish Dictionary : 500 result(s)',
-      words: [...[Word]]
-    }]
+     words: [ [Word] ]
+   }]
   
     also word has these properties;
   

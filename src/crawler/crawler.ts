@@ -101,7 +101,7 @@ export class TurengCrawler {
 
   isExpectedAmount(allData: WordBlock[], amount: number) {
     let amountOfWords: number = 0;
-    let filteredByAmount: WordBlock[] = [];
+    const filteredByAmount: WordBlock[] = [];
     allData.forEach((wordBlock, indexOfWordBlock) => {
       if (!filteredByAmount[indexOfWordBlock]) {
         filteredByAmount[indexOfWordBlock] = {
@@ -116,7 +116,7 @@ export class TurengCrawler {
           amountOfWords++;
         }
       });
-      if(filteredByAmount[indexOfWordBlock].words.length == 0){
+      if(filteredByAmount[indexOfWordBlock].words.length === 0){
         delete filteredByAmount[indexOfWordBlock];
       }
     });
