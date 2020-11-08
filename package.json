@@ -1,12 +1,11 @@
 {
   "name": "tureng-translator",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "This is a tureng translator",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
     "watch": "nodemon",
-    "build": "tsc",
     "format": "prettier --write \"src/**/*.ts\" \"lib/**/*.js\"",
     "lint": "tslint -p tsconfig.json",
     "prepare": "npm run build",

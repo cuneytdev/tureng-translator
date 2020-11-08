@@ -2,10 +2,23 @@ import Crawler = require('crawler');
 import { TranslationType } from './models/language.enum';
 import { ElementName, ElementType } from './models/element.enum';
 import { Word, WordBlock } from './models/word.interface';
+import { Config } from './models/config.interface';
 export class TurengCrawler {
   c: any;
-  async translate(word: string, translationType: TranslationType): Promise<WordBlock[]> {
-    const words: WordBlock[] = await this.crawl(word, translationType);
+  async translate(word: string, translationType: TranslationType, config?: Config): Promise<WordBlock[]> {
+    let conf: Config = new Config();
+    if (config) {
+      conf = config;
+    }
+
+    let words: WordBlock[] = await this.crawl(word, translationType);
+    if (!conf.detailed) {
+      words = [words[0]];
+    }
+    if (conf.amount) {
+      const filteredData = this.isExpectedAmount(words, conf.amount);
+      words = filteredData;
+    }
     return Promise.resolve(words);
   }
 
@@ -84,6 +97,30 @@ export class TurengCrawler {
       const url = `https://tureng.com/en/${translationType}/${word}`;
       this.c.queue(url);
     });
+  }
+
+  isExpectedAmount(allData: WordBlock[], amount: number) {
+    let amountOfWords: number = 0;
+    let filteredByAmount: WordBlock[] = [];
+    allData.forEach((wordBlock, indexOfWordBlock) => {
+      if (!filteredByAmount[indexOfWordBlock]) {
+        filteredByAmount[indexOfWordBlock] = {
+          description: '',
+          words: [],
+        };
+      }
+      filteredByAmount[indexOfWordBlock].description = wordBlock.description;
+      wordBlock.words.forEach((word: Word, i: number) => {
+        if (amountOfWords < amount) {
+          filteredByAmount[indexOfWordBlock].words.push(word);
+          amountOfWords++;
+        }
+      });
+      if(filteredByAmount[indexOfWordBlock].words.length == 0){
+        delete filteredByAmount[indexOfWordBlock];
+      }
+    });
+    return filteredByAmount;
   }
 
   getWordsContainerHeader(hElement: any): string {
