@@ -2,7 +2,7 @@ import { Config, ElementName, TranslationType, Word, WordBlock } from './models'
 import Crawler = require('crawler');
 
 export function translate(word: string, translateType: TranslationType, config?: Config) {
-  return crawl(word, translateType).then(resp => {
+  return crawl(word, translateType).then((resp) => {
     let words = resp;
 
     if (config && !config.detailed) {
@@ -20,14 +20,14 @@ function crawl(word: string, translationType: TranslationType): Promise<WordBloc
   return new Promise<WordBlock[]>((resolve, reject) => {
     const c = new Crawler({
       maxConnections: 10,
-      callback: ((error: any, res: any, done: any) => {
+      callback: (error: any, res: any, done: any) => {
         if (error) {
           reject(error);
         } else {
           const $ = res.$;
           const searchResults = $(`.tureng-searchresults-col-left`).contents().filter('.table');
           const allWords: WordBlock[] = [];
-          searchResults.each((i: number, table: any) => {
+          searchResults.each((_i: number, table: any) => {
             const words: Word[] = [];
             const wordBlock: WordBlock = { description: '', words };
             const tableChildren = table.children;
@@ -86,7 +86,7 @@ function crawl(word: string, translationType: TranslationType): Promise<WordBloc
           resolve(allWords);
         }
         done();
-      }),
+      },
     });
     const url = `https://tureng.com/en/${translationType}/${word}`;
     c.queue(url);
